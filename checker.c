@@ -20,11 +20,6 @@ bool CheckValueOutOfRange (float input, float MinThreshold, float MaxThreshold)
   return (input < MinThreshold || input > MaxThreshold);
 }
 
-bool BatteryIsOk (float temperature, float soc, float ChargeRate)
-{
-  return (TemperatureRangeCheck(temperature) || socRangeCheck (soc) || chargeRateCheck(ChargeRate));
-}
-
 bool TemperatureRangeCheck (float temperature)
 {
   bool TemperaturStatus = CheckValueOutOfRange (temperature, (float) Min_soc, (float) Max_soc);
@@ -47,6 +42,11 @@ bool chargeRateCheck (float chargeRate)
   if(chargeRateStatus)
     Display("Charge Rate out of range!");
   return chargeRateStatus;
+}
+
+bool BatteryIsOk (float temperature, float soc, float ChargeRate)
+{
+  return (TemperatureRangeCheck(temperature) || socRangeCheck (soc) || chargeRateCheck(ChargeRate));
 }
 
 void TestCheckBatteryIsOk (float Temperature, float soc, float ChargeRate, bool expectedstatus)
