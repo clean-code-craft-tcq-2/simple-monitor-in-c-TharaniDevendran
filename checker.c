@@ -27,7 +27,7 @@ bool BatteryIsOk (float temperature, float soc, float ChargeRate)
 
 bool TemperatureRangeCheck (float temperature)
 {
-  bool TemperaturStatus = CheckBatteryIsOk (temperature, (float) Min_soc, (float) Max_soc);
+  bool TemperaturStatus = CheckValueOutOfRange (temperature, (float) Min_soc, (float) Max_soc);
   if(TemperaturStatus)
     Display("Temperature out of range!");
   return TemperaturStatus;
@@ -35,7 +35,7 @@ bool TemperatureRangeCheck (float temperature)
 
 bool socRangeCheck (float soc)
 {
-  bool socStatus = CheckBatteryIsOk (soc, (float) Min_ChargeRate, (float) Max_ChargeRate);
+  bool socStatus = CheckValueOutOfRange (soc, (float) Min_ChargeRate, (float) Max_ChargeRate);
   if(socStatus)
     Display("State of Charge out of range!");
   return socStatus;
@@ -43,7 +43,7 @@ bool socRangeCheck (float soc)
 
 bool chargeRateCheck (float chargeRate)
 {
-  bool chargeRateStatus = CheckBatteryIsOk (chargeRate, (float) Min_Temperature, (float) Max_Temperature);
+  bool chargeRateStatus = CheckValueOutOfRange (chargeRate, (float) Min_Temperature, (float) Max_Temperature);
   if(chargeRateStatus)
     Display("Charge Rate out of range!");
   return chargeRateStatus;
