@@ -63,8 +63,8 @@ void TestCheckValueOutOfRange (bool expectedstatus, float testInput, float testM
 
 int main() 
 {
-  TestCheckValueOutOfRange(0, 25, 20, 22);
-  TestCheckValueOutOfRange(1, 21, 20, 22);
+  TestCheckValueOutOfRange(1, 25, 20, 22);
+  TestCheckValueOutOfRange(0, 21, 20, 22);
   
   TestCheckBatteryIsOk(0, 25, 70, 0.7);
   TestCheckBatteryIsOk(1, 50, 85, 0);
