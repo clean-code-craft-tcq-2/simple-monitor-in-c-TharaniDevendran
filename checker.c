@@ -49,7 +49,7 @@ bool BatteryIsOk (float temperature, float soc, float ChargeRate)
   return (TemperatureRangeCheck(temperature) || socRangeCheck (soc) || chargeRateCheck(ChargeRate));
 }
 
-void TestCheckBatteryIsOk (float Temperature, float soc, float ChargeRate, bool expectedstatus)
+void TestCheckBatteryIsOk (bool expectedstatus, float Temperature, float soc, float ChargeRate)
 {
   bool teststatus = BatteryIsOk(Temperature, soc, ChargeRate);
   assert(teststatus == expectedstatus);
