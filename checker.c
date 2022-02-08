@@ -22,7 +22,7 @@ bool CheckValueOutOfRange (float input, float MinThreshold, float MaxThreshold)
 
 bool BatteryIsOk (float temperature, float soc, float ChargeRate)
 {
-  return (TemperatureRangeCheck(temperature) || socRangeCheck (soc) || chargeRateCheck(ChargeRate);
+  return (TemperatureRangeCheck(temperature) || socRangeCheck (soc) || chargeRateCheck(ChargeRate));
 }
 
 bool TemperatureRangeCheck (float temperature)
