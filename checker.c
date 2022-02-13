@@ -9,6 +9,10 @@
 #define Min_ChargeRate 0
 #define Max_ChargeRate 0.8
 
+char TemperatureWarning[] = ""Temperature out of range!";
+char socWarning[] = "State of Charge out of range!";
+char chargeRateWarning[] = "Charge Rate out of range!" ;
+
 void Display(char *DisplayText)
 {
   if(DisplayText != NULL)
@@ -23,35 +27,39 @@ bool CheckValueOutOfRange (float input, float MinThreshold, float MaxThreshold)
 bool TemperatureRangeCheck (float temperature)
 {
   bool TemperaturStatus = CheckValueOutOfRange (temperature, (float) Min_Temperature, (float) Max_Temperature);
-  if(TemperaturStatus)
-    Display("Temperature out of range!");
   return TemperaturStatus;
 }
 
 bool socRangeCheck (float soc)
 {
   bool socStatus = CheckValueOutOfRange (soc, (float) Min_soc, (float) Max_soc);
-  if(socStatus)
-    Display("State of Charge out of range!");
   return socStatus;
 }
 
 bool chargeRateCheck (float chargeRate)
 {
   bool chargeRateStatus = CheckValueOutOfRange (chargeRate, (float) Min_ChargeRate, (float) Max_ChargeRate);
-  if(chargeRateStatus)
-    Display("Charge Rate out of range!");
   return chargeRateStatus;
 }
 
-bool BatteryIsOk (float temperature, float soc, float ChargeRate)
+bool BatteryValueIsNOk (float value, bool (*RangeCheck) (float), char *warning)
 {
-  return (TemperatureRangeCheck(temperature) || socRangeCheck (soc) || chargeRateCheck(ChargeRate));
+  bool val = RangeCheck(value);
+  if (!val)
+     Display(warning);
+  return val;
+}
+                         
+bool BatteryIsNOk (float temperature, float soc, float ChargeRate)
+{
+  bool val = BatteryValueIsNOk(temperature, TemperatureRangeCheck, TemperatureWarning);
+  val = val || BatteryValueIsNOk(soc, socRangeCheck, socWarning);
+  val = val || BatteryValueIsNOk(ChargeRate, chargeRateCheck, chargeRateWarning);
 }
 
-void TestCheckBatteryIsOk (bool expectedstatus, float Temperature, float soc, float ChargeRate)
+void TestCheckBatteryIsNOk (bool expectedstatus, float Temperature, float soc, float ChargeRate)
 {
-  bool teststatus = BatteryIsOk(Temperature, soc, ChargeRate);
+  bool teststatus = BatteryIsNOk(Temperature, soc, ChargeRate);
   assert(teststatus == expectedstatus);
 }
 
@@ -66,8 +74,8 @@ int main()
   TestCheckValueOutOfRange(1, 25, 20, 22);
   TestCheckValueOutOfRange(0, 21, 20, 22);
   
-  TestCheckBatteryIsOk(0, 25, 70, 0.7);
-  TestCheckBatteryIsOk(1, 50, 85, 0);
+  TestCheckBatteryIsNOk(0, 25, 70, 0.7);
+  TestCheckBatteryIsNOk(1, 50, 85, 0);
   
   return 0;
 }
