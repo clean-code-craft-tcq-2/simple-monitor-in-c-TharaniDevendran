@@ -9,7 +9,7 @@
 #define Min_ChargeRate 0
 #define Max_ChargeRate 0.8
 
-char TemperatureWarning[] = ""Temperature out of range!";
+char TemperatureWarning[] = "Temperature out of range!";
 char socWarning[] = "State of Charge out of range!";
 char chargeRateWarning[] = "Charge Rate out of range!" ;
 
