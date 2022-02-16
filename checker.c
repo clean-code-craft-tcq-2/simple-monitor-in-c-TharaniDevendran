@@ -156,8 +156,6 @@ bool chargeRateCheck (float chargeRate, bool (*PrintChargeRateWarning)(float), b
 	}
 
 }
-
-bool 
                     
 bool BatteryIsNOk (float temperature, float soc, float ChargeRate)
 {
