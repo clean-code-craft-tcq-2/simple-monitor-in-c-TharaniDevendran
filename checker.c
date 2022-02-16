@@ -175,6 +175,7 @@ int main()
 {
  
   TestCheckBatteryIsNOk(1, 25, 70, 0.7);
+  TestCheckBatteryIsNOk(1, 50, 85, 0);
   
   return 0;
 }
