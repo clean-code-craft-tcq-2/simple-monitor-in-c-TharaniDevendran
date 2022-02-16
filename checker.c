@@ -35,7 +35,7 @@ const char ChargeRateWarning[] ="LADESTUFE ZU NIEDRIG"
 
 #endif
 
-void Display(char *DisplayText)
+void Display(const char *DisplayText)
 {
   if(DisplayText != NULL)
     printf("%s \n", DisplayText);
