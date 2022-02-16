@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <assert.h>
-#include >
 
 #define Min_Temperature 0
 #define Max_Temperature 45
@@ -23,7 +22,7 @@ const char CharRateNotify[] = "CHARGE ALERT";
 
 const char TemperatureWarning[] ="TEMPERATURE OUT OF RANGE";
 const char SOCWarning[] ="SOC OUT OF RANGE ";
-const char ChargeRateWarning[] = CHARGE RATE TOO LOW";
+const char ChargeRateWarning[] = "CHARGE RATE TOO LOW";
 
 #elif(LANGUAGE == GERMAN)
 const char TemperatureNotify[]="TEMPERATURALARM";
@@ -165,6 +164,7 @@ bool BatteryIsNOk (float temperature, float soc, float ChargeRate)
   bool val = TemperatureCheck (temperature, TemperatureWarningCheck, TemperatureAlarmCheck);
   val = val || socCheck (soc, socWarningCheck, socAlarmCheck);
   val = val || chargeRateCheck (ChargeRate, chargeRateWarningCheck, chargeRateAlarmCheck);
+  return val;
 }
 
 void TestCheckBatteryIsNOk (bool expectedstatus, float Temperature, float soc, float ChargeRate)
