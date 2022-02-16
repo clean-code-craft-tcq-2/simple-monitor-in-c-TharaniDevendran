@@ -17,23 +17,23 @@
 #define LANGUAGE ENGLISH
 
 #if(LANGUAGE == ENGLISH)
-const char Notify[][] ={"TEMPERATURE ALERT",
-                     "SOC ALERT",
-                     "CHARGE ALERT"
-                    };
-const char Warning[][] ={"TEMPERATURE OUT OF RANGE",
-                     "SOC OUT OF RANGE ",
-                     "CHARGE RATE TOO LOW"
-                    };
+const char TemperatureNotify[] ="TEMPERATURE ALERT";
+const char SOCNotify[] ="SOC ALERT";
+const char CharRateNotify[] = "CHARGE ALERT";
+
+const char TemperatureWarning[] ="TEMPERATURE OUT OF RANGE";
+const char SOCWarning[] ="SOC OUT OF RANGE ";
+const char ChargeRateWarning[] = CHARGE RATE TOO LOW";
+
 #elif(LANGUAGE == GERMAN)
-const char Notify[][] ={"TEMPERATURALARM",
-                     "SOC-ALARM",
-                     "LADEZAHLALARM"
-                    };
-const char Warning[][] ={"TEMPERATUR AUSSERHALB DES BEREICHS",
-                     "SOC AUSSERHALB DER REICHWEITE",
-                     "LADESTUFE ZU NIEDRIG"
-                    };
+const char TemperatureNotify[]="TEMPERATURALARM";
+const char SOCNotify[] = "SOC-ALARM";
+const char CharRateNotify[] = "LADEZAHLALARM";
+
+const char TemperatureWarning[] ="TEMPERATUR AUSSERHALB DES BEREICHS";
+const char SOCWarning[] = "SOC AUSSERHALB DER REICHWEITE";
+const char ChargeRateWarning[] ="LADESTUFE ZU NIEDRIG"
+
 #endif
 
 void Display(char *DisplayText)
@@ -46,11 +46,7 @@ bool TemperatureAlarmCheck(float temperature)
 {
 	if((Min_Temperature + TEMP_WARNING_TOLERANCE ) > temperature || (Max_Temperature - TEMP_WARNING_TOLERANCE ) < temperature)
 	{
-		for(int i =0; i< strlen(Notify[0]); i++)
-		{
-		char displayText[i] = Notify[0][i];
-		}
-		Display (displayText);
+		Display (TemperatureNotify);
 		return true;
 	}
 	else
@@ -63,7 +59,7 @@ bool TemperatureWarningCheck(float temperature)
 {
 	if((Min_Temperature > temperature) || (Max_Temperature < temperature))
 	{
-		Display (Warning[0]);
+		Display (TemperatureWarning);
 		return true;
 	}
 	else
@@ -76,7 +72,7 @@ bool socAlarmCheck(float soc)
 {
 	if((Min_soc + SOC_WARNING_TOLERANCE ) > soc || (Max_soc  - SOC_WARNING_TOLERANCE ) < soc)
 	{
-		Display (Notify[1]);
+		Display (SOCNotify);
 		return true;
 	}
 	else
@@ -89,7 +85,7 @@ bool socWarningCheck(float soc)
 {
 	if((Min_soc  > soc) || (Max_soc < soc))
 	{
-		Display (Warning[1]);
+		Display (SOCWarning);
 		return true;
 	}
 	else
@@ -102,7 +98,7 @@ bool chargeRateAlarmCheck(float chargerate)
 {
 	if((Min_ChargeRate + CHARGERATE_WARNING_TOLERANCE ) > chargerate || (Max_ChargeRate  - CHARGERATE_WARNING_TOLERANCE ) < chargerate)
 	{
-		Display (Notify[2]);
+		Display (CharRateNotify);
 		return true;
 	}
 	else
@@ -115,7 +111,7 @@ bool chargeRateWarningCheck(float chargerate)
 {
 	if((Min_ChargeRate > chargerate) || (Max_ChargeRate < chargerate))
 	{
-		Display (Warning[2]);
+		Display (ChargeRateWarning);
 		return true;
 	}
 	else
