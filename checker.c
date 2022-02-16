@@ -174,7 +174,7 @@ void TestCheckBatteryIsNOk (bool expectedstatus, float Temperature, float soc, f
 int main() 
 {
  
-  TestCheckBatteryIsNOk(0, 25, 70, 0.7);
+  TestCheckBatteryIsNOk(1, 25, 70, 0.7);
   
   return 0;
 }
