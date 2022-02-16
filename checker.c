@@ -16,20 +16,20 @@
 #define LANGUAGE ENGLISH
 
 #if(LANGUAGE == ENGLISH)
-const char *Notify[] ={"TEMPERATURE ALERT",
+const char Notify[] ={"TEMPERATURE ALERT",
                      "SOC ALERT",
                      "CHARGE ALERT"
                     };
-const char *Warning[] ={"TEMPERATURE OUT OF RANGE",
+const char Warning[] ={"TEMPERATURE OUT OF RANGE",
                      "SOC OUT OF RANGE ",
                      "CHARGE RATE TOO LOW"
                     };
 #elif(LANGUAGE == GERMAN)
-const char *Notify[] ={"TEMPERATURALARM",
+const char Notify[] ={"TEMPERATURALARM",
                      "SOC-ALARM",
                      "LADEZAHLALARM"
                     };
-const char *Warning[] ={"TEMPERATUR AUSSERHALB DES BEREICHS",
+const char Warning[] ={"TEMPERATUR AUSSERHALB DES BEREICHS",
                      "SOC AUSSERHALB DER REICHWEITE",
                      "LADESTUFE ZU NIEDRIG"
                     };
@@ -95,7 +95,7 @@ bool socWarningCheck(float soc)
 
 bool chargeRateAlarmCheck(float chargerate)
 {
-	if((Min_ChargeRate + CHARGERATE_WARNING_TOLERANCE ) > temperature || (Max_ChargeRate  - CHARGERATE_WARNING_TOLERANCE ) < temperature)
+	if((Min_ChargeRate + CHARGERATE_WARNING_TOLERANCE ) > chargerate || (Max_ChargeRate  - CHARGERATE_WARNING_TOLERANCE ) < chargerate)
 	{
 		Display (Warning[2]);
 		return true;
@@ -146,13 +146,13 @@ bool socCheck (float soc, bool (*PrintSocWarning)(float), bool (*PrintSocAlarm)(
 
 bool chargeRateCheck (float chargeRate, bool (*PrintChargeRateWarning)(float), bool (*PrintChargeRateAlarm)(float))
 {
-  if (PrintChargeRateWarning (soc))
+  if (PrintChargeRateWarning (chargeRate))
 	{
 		return true;
 	}
    else
 	{
-		return (PrintChargeRateAlarm(soc));
+		return (PrintChargeRateAlarm(chargeRate));
 	}
 
 }
